@@ -4,7 +4,10 @@ import cart from '../assets/cart.png';
 
 const Navigation = () => {
   return (
-    <div className="max-w-[750px] min-[750px]:mx-auto mx-4 relative top-4 h-[4rem] bg-mysecondary rounded-md shadow-md flex items-center justify-between px-4">
+    <div
+      className="max-w-[750px] min-[750px]:mx-auto mx-4  relative z-10 top-4 inset-x-auto h-[4rem] bg-mysecondary 
+    rounded-md shadow-xl flex items-center justify-between px-4"
+    >
       <div className="flex items-center gap-x-4 cursor-pointer">
         <img src={logo} className="size-12 object-cover object-center" />
         <p className="text-xl font-logo text-myaccent font-extrabold ">

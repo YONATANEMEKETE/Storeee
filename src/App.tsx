@@ -1,16 +1,13 @@
-import Hero from './Components/Hero';
-import Navigation from './Components/Navigation';
-import ProductList from './Components/ProductList';
-import Footer from './Components/Footer';
+import Cart from './Components/Cart';
+import Home from './Components/Home';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="">
-      <Navigation />
-      <Hero />
-      <ProductList />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/cart" element={<Cart />} />
+    </Routes>
   );
 }
 

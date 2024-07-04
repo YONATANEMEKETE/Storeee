@@ -1,6 +1,6 @@
 export type Data = Product[];
 
-type Product = {
+export type Product = {
   id: number;
   title: string;
   price: string;

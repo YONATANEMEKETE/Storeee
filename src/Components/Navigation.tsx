@@ -1,6 +1,7 @@
 import { UserCircle } from 'lucide-react';
 import logo from '../assets/logo.png';
 import cart from '../assets/cart.png';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   return (
@@ -21,12 +22,15 @@ const Navigation = () => {
         >
           <UserCircle className=" text-mysecondary transition-colors duration-100" />
         </div>
-        <div className="relative size-10 p-2 border border-myaccent rounded-sm cursor-pointer grid place-content-center hover:bg-myprimary transition-all duration-300">
-          <img src={cart} className="object-cover object-center size-8" />
-          <div className="absolute -top-3 -right-3 size-6 bg-myfooterbg rounded-full text-mysecondary text-xs grid place-content-center">
-            4
+
+        <Link to="/cart">
+          <div className="relative size-10 p-2 border border-myaccent rounded-sm cursor-pointer grid place-content-center hover:bg-myprimary transition-all duration-300">
+            <img src={cart} className="object-cover object-center size-8" />
+            <div className="absolute -top-3 -right-3 size-6 bg-myfooterbg rounded-full text-mysecondary text-xs grid place-content-center">
+              4
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

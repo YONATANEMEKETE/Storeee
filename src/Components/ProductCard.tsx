@@ -1,13 +1,25 @@
 import { useState } from 'react';
+import useCartStore from '../Services/cartStore';
 type Props = {
   title: string;
   price: string;
-  id?: number;
+  id: number;
   image: string;
 };
 
-const ProductCard = ({ title, price, image }: Props) => {
+const ProductCard = ({ title, price, image, id }: Props) => {
   const [isAdded, setIsAdded] = useState(false);
+  const { addToCart, removeFromCart } = useCartStore();
+
+  const handleAddToCart = () => {
+    if (!isAdded) {
+      addToCart({ title, price, image, id });
+      setIsAdded(true);
+    } else {
+      removeFromCart(id);
+      setIsAdded(false);
+    }
+  };
 
   return (
     <div
@@ -27,7 +39,7 @@ const ProductCard = ({ title, price, image }: Props) => {
         <p className="text-lg text-mytext font-logo font-extrabold ml-2">{`$${price}`}</p>
       </div>
       <button
-        onClick={() => setIsAdded(!isAdded)}
+        onClick={handleAddToCart}
         className={`py-2 px-4 ${
           isAdded ? 'bg-myfooterbg' : 'bg-myaccent'
         }  rounded-lg text-mysecondary font-bold text-lg font-normal`}

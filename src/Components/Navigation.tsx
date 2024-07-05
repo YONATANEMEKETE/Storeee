@@ -1,9 +1,12 @@
 import { UserCircle } from 'lucide-react';
 import logo from '../assets/logo.png';
-import cart from '../assets/cart.png';
+import cartImg from '../assets/cartImg.png';
 import { Link } from 'react-router-dom';
+import useCartStore from '../Services/cartStore';
 
 const Navigation = () => {
+  const { cart } = useCartStore();
+
   return (
     <div
       className="max-w-[750px] min-[750px]:mx-auto mx-4  relative z-10 top-4 inset-x-auto h-[4rem] bg-mysecondary 
@@ -25,9 +28,9 @@ const Navigation = () => {
 
         <Link to="/cart">
           <div className="relative size-10 p-2 border border-myaccent rounded-sm cursor-pointer grid place-content-center hover:bg-myprimary transition-all duration-300">
-            <img src={cart} className="object-cover object-center size-8" />
+            <img src={cartImg} className="object-cover object-center size-8" />
             <div className="absolute -top-3 -right-3 size-6 bg-myfooterbg rounded-full text-mysecondary text-xs grid place-content-center">
-              4
+              {cart.length}
             </div>
           </div>
         </Link>

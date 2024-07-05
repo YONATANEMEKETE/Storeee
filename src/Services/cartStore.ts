@@ -11,9 +11,9 @@ const useCartStore = create<StoreData>((set) => ({
   cart: [
     {
       id: 1,
-      title: 'test',
-      price: 'test',
-      image: 'test',
+      title: 'Product 1',
+      price: '$100',
+      image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
     },
   ],
   addToCart: (product) => set((state) => ({ cart: [...state.cart, product] })),

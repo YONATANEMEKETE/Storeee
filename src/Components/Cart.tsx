@@ -1,9 +1,46 @@
 import { ChevronLeft } from 'lucide-react';
 import Container from './Container';
-import heroBg from '../assets/heroBg.jpg';
+// import heroBg from '../assets/heroBg.jpg';
 import { Link } from 'react-router-dom';
+import useCartStore from '../Services/cartStore';
+
+type props = {
+  title: string;
+  price: string;
+  id?: number;
+  image: string;
+};
+
+function CartProduct({ title, price, image }: props) {
+  return (
+    <div
+      className=" h-[18rem] p-4 flex items-start justify-between 
+            rounded-lg bg-mysecondary cursor-pointer hover:shadow-xl transition-all duration-300"
+    >
+      <div className="h-full w-[40%]  rounded-lg overflow-hidden">
+        <img src={image} className="w-full h-full object-cover object-center" />
+      </div>
+      <div className="h-full w-[55%]  flex flex-col items-start justify-between py-2">
+        <div>
+          <p className="text-lg text-mytext font-normal font-bold mb-2">
+            {title}
+          </p>
+          <p className="text-base text-mytext font-logo font-bold">{price}</p>
+        </div>
+        <button
+          className={`py-2 px-4 bg-myfooterbg 
+                     rounded-lg text-mysecondary font-bold text-lg font-normal self-end`}
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  );
+}
 
 const Cart = () => {
+  const { cart } = useCartStore();
+
   return (
     <div className="h-fit  pt-16 pb-16">
       <Container className="">
@@ -16,33 +53,17 @@ const Cart = () => {
 
         <div className="flex flex-col min-[1130px]:flex-row items-center min-[1130px]:items-start gap-10">
           <div className=" basis-2/3  px-4 pt-2 flex flex-col gap-6">
-            <div
-              className="border-2 border-white h-[18rem] p-4 flex items-start justify-between 
-            rounded-lg bg-mysecondary cursor-pointer hover:shadow-xl transition-all duration-300"
-            >
-              <div className="h-full w-[40%] border border-white rounded-lg overflow-hidden">
-                <img
-                  src={heroBg}
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
-              <div className="h-full w-[55%]  flex flex-col items-start justify-between py-2">
-                <div>
-                  <p className="text-lg text-mytext font-normal font-bold mb-2">
-                    Product amazing blablabla
-                  </p>
-                  <p className="text-base text-mytext font-logo font-bold">
-                    100$
-                  </p>
-                </div>
-                <button
-                  className={`py-2 px-4 bg-myfooterbg 
-                     rounded-lg text-mysecondary font-bold text-lg font-normal self-end`}
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
+            {cart?.map((item) => (
+              <CartProduct
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                image={item.image}
+                id={item.id}
+              />
+            ))}
+
+            {/* <CartProduct title="product 1" price="$100" image={heroBg} id={1} /> */}
           </div>
 
           <div className="pb-8 w-1/2 min-[1130px]:w-1/3 mt-2 px-4 pt-4 bg-mysecondary">

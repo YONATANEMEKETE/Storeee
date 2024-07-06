@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useCartStore from '../Services/cartStore';
+// import useLocalStorage from '../Utils/useLocalStorage';
 type Props = {
   title: string;
   price: string;
@@ -8,15 +9,18 @@ type Props = {
 };
 
 const ProductCard = ({ title, price, image, id }: Props) => {
+  // const [value, setValue] = useLocalStorage('isAdded', 'false');
   const [isAdded, setIsAdded] = useState(false);
   const { addToCart, removeFromCart } = useCartStore();
 
   const handleAddToCart = () => {
-    if (!isAdded) {
+    if (isAdded === false) {
       addToCart({ title, price, image, id });
+      // setValue('true');
       setIsAdded(true);
     } else {
       removeFromCart(id);
+      // setValue('false');
       setIsAdded(false);
     }
   };
@@ -41,10 +45,11 @@ const ProductCard = ({ title, price, image, id }: Props) => {
       <button
         onClick={handleAddToCart}
         className={`py-2 px-4 ${
-          isAdded ? 'bg-myfooterbg' : 'bg-myaccent'
+          isAdded === true ? 'bg-myfooterbg' : 'bg-myaccent'
         }  rounded-lg text-mysecondary font-bold text-lg font-normal`}
       >
-        {isAdded ? 'Added to Cart' : 'Add to cart'}
+        {isAdded === true ? 'Added to Cart' : 'Add to cart'}
+        {/* {isAdded ? 'Added to Cart' : 'Add to cart'} */}
       </button>
     </div>
   );

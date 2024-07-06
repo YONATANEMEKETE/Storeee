@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { Data, Product } from './Types';
 
 type StoreData = {
@@ -7,18 +8,36 @@ type StoreData = {
   removeFromCart: (id: number) => void;
 };
 
-const useCartStore = create<StoreData>((set) => ({
-  cart: [
-    // {
-    //   id: 100,
-    //   title: 'Product 1',
-    //   price: '100',
-    //   image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-    // },
-  ],
-  addToCart: (product) => set((state) => ({ cart: [...state.cart, product] })),
-  removeFromCart: (id) =>
-    set((state) => ({ cart: state.cart.filter((p) => p.id !== id) })),
-}));
+const useCartStore = create<StoreData>()(
+  persist(
+    (set, get) => ({
+      cart: [],
+      addToCart: (product) =>
+        set((state) => {
+          const cart = get().cart;
+          if (!cart[product.id]) {
+            return { cart: [...state.cart, product] };
+          }
+
+          return { cart: state.cart };
+        }),
+      removeFromCart: (id) =>
+        set((state) => ({ cart: state.cart.filter((p) => p.id !== id) })),
+    }),
+    {
+      name: 'cart-storage',
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
+
+//   (set) => (
+//   {
+//   cart: [],
+//   addToCart: (product) => set((state) => ({ cart: [...state.cart, product] })),
+//   removeFromCart: (id) =>
+//     set((state) => ({ cart: state.cart.filter((p) => p.id !== id) })),
+// }
+// )
 
 export default useCartStore;

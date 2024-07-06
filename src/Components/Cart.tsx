@@ -67,7 +67,7 @@ const Cart = () => {
 
         <div className="flex flex-col min-[1130px]:flex-row items-center min-[1130px]:items-start gap-10">
           <motion.div className=" basis-2/3  px-4 pt-2 flex flex-col gap-6">
-            {cart?.map((item, index) => (
+            {cart.map((item, index) => (
               <CartProduct
                 key={index}
                 title={item.title}
@@ -76,8 +76,6 @@ const Cart = () => {
                 id={item.id}
               />
             ))}
-
-            {/* <CartProduct title="product 1" price="$100" image={heroBg} id={1} /> */}
           </motion.div>
 
           <div className="pb-8 w-1/2 min-[1130px]:w-1/3 mt-2 px-4 pt-4 bg-mysecondary">

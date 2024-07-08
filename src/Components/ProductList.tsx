@@ -18,7 +18,6 @@ const ProductList = () => {
   });
 
   const productData = data;
-  // console.log(data);
 
   return (
     <div className="w-max grid min-[750px]:grid-cols-2 min-[1200px]:grid-cols-3  items-start gap-4 mx-auto">

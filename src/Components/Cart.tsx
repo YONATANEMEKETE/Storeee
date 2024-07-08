@@ -1,9 +1,7 @@
 import { ChevronLeft } from 'lucide-react';
 import Container from './Container';
-// import heroBg from '../assets/heroBg.jpg';
 import { Link } from 'react-router-dom';
 import useCartStore from '../Services/cartStore';
-// import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 type props = {
